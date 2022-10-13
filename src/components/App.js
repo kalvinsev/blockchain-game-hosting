@@ -6,6 +6,29 @@ import brain from '../brain.png'
 
 class App extends Component {
 
+  async componentWillMount(){
+    await this.loadWeb3()
+    await this.loadBlockchainData()
+  }
+
+  async loadWeb3(){
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.enable()
+    }
+    else if(window.web3){
+      window.web3 = new Web3(window.web3.currentProvider)
+    }
+    else {
+      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    }
+  }
+
+  async loadBlockchainData(){
+    const web3 = window.web3
+    const accounts = await web3.eth.getAccounts()
+    this.setState({account: accounts[0] })
+  }
 
   constructor(props) {
     super(props)
@@ -17,7 +40,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <nav className="navbar navbar-dark fixed-top  bg-dark flex-md-nowrap p-0 shadow">
           <a
             className="navbar-brand col-sm-3 col-md-2 mr-0"
             href="http://www.dappuniversity.com/bootcamp"
@@ -37,7 +60,7 @@ class App extends Component {
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
-                <h1 className="d-4">Edit this file in App.js!</h1>
+                <h1 className="d-4">Kalvin, edit this file in App.js!</h1>
 
                 <div className="grid mb-4" >
 
