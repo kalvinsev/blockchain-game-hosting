@@ -1,8 +1,36 @@
 /* Styles go here */
 
+body {
+  background: linear-gradient(-45deg, black, rgb(0, 128, 119), rgba(250, 4, 237, 0.362));
+  background-size: 200% 200%;
+  margin: 0;
+  padding: 0;
+  animation: animate 15s ease infinite;
+}
+
 .token {
   height: 150px;
   width: 150px;
   border-radius: 50%;
   display: inline-block;
+}
+
+.grid {
+  margin-top: 50%;
+}
+
+.grid:hover {
+  cursor: pointer;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  0% {
+    background-position: 0 50%;
+  }
 }
