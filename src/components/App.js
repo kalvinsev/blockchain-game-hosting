@@ -107,12 +107,15 @@ class App extends Component {
 
   chooseImage = (cardId) => {
     cardId = cardId.toString()
-    if(this.state.cardsChosenId.includes(cardId)){
+    if(this.state.cardsWon.includes(cardId)){
+      return window.location.origin + '/images/white.png'
+    } else if(this.state.cardsChosenId.includes(cardId)){
       return CARD_ARRAY[cardId].img
     } else {
       return window.location.origin + '/images/blank.png'
     }
   }
+
   flipCard = async (cardId) => {
     let alreadyChosen = this.state.cardsChosen.length
 
@@ -130,12 +133,15 @@ class App extends Component {
     const optionOneId = this.state.cardsChosenId[0]
     const optionTwoId = this.state.cardsChosenId[1]
 
-    if(optionOneId== optionTwoId){
+    if(optionOneId == optionTwoId){
       alert('You have clicked the same image!')
     } else if(this.state.cardsChosen[0] === this.state.cardsChosen[1]){
-      alert('You found a match')
+      alert('You found a match!')
+      this.setState({
+        cardsWon: [...this.state.cardsWon, optionOneId, optionTwoId]
+      })
     } else {
-      alert('Sorry, try again')
+      alert('Sorry, try again!')
     }
     this.setState({
       cardsChosen: [],
@@ -183,10 +189,9 @@ class App extends Component {
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
-                <h1 className="d-4">Kalvin, edit this file in App.js!</h1>
+                <h1 className="d-4"></h1>
 
                 <div className="grid mb-4" >
-
                   {this.state.cardArray.map((card, key) => {
                     return(
                       <img
